@@ -4,7 +4,7 @@ Welcome to my web-based portfolio! This project showcases my work, technical ski
 
 ## 🚀 View the Live Site
 You can view my interactive portfolio here: 
-[https://esperiquette.github.io/WebHTML/](https://esperiquette.github.io/WebHTML/)
+[https://esperiquette.github.io/WebHTML/](https://esperiquette.github.io/portfolio/)
 
 ## 🛠 Tech Stack
 * **Frontend:** HTML5, CSS3
