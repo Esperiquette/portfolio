@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luke Esperiquette — Mechanical Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F7F6F2;
+    --bg-warm: #EEEAE0;
+    --ink: #111111;
+    --ink-mid: #333333;
+    --ink-light: #666666;
+    --rule: #CCCCCC;
+    --accent: #1A4A90;
+    --accent-light: #2560C4;
+    --accent-warm: #B84E22;
+    --green: #2A6B3C;
+    --green-light: #3B8F53;
+    --green-bg: rgba(42,107,60,0.06);
+    --green-border: rgba(42,107,60,0.22);
+    --card-bg: #FFFFFF;
+    --mono: 'DM Mono', monospace;
+    --serif: 'DM Serif Display', serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(247,246,242,0.97); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    height: 62px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem;
+  }
+  .nav-logo { font-family: var(--mono); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em; color: var(--ink); text-transform: uppercase; cursor: pointer; }
+  .nav-links { display: flex; list-style: none; }
+  .nav-links a { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; cursor: pointer; padding: 0 0.9rem; display: block; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
+
+  .mobile-menu { display: none; position: fixed; top: 62px; left: 0; right: 0; background: rgba(247,246,242,0.99); border-bottom: 1px solid var(--rule); z-index: 99; flex-direction: column; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-family: var(--mono); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mid); text-decoration: none; padding: 1rem 2rem; border-bottom: 1px solid var(--rule); cursor: pointer; }
+  .mobile-menu a:hover, .mobile-menu a.active { color: var(--accent); background: var(--bg-warm); }
+
+  /* PAGE SYSTEM */
+  .page { display: none; padding-top: 62px; min-height: 100vh; }
+  .page.active { display: block; animation: pageIn 0.3s ease forwards; }
+  @keyframes pageIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+  /* LAYOUT */
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 2rem; }
+  .section { padding: 4rem 0; }
+  .section + .section { border-top: 1px solid var(--rule); }
+  .section-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; display: block; }
+
+  h1 { font-family: var(--serif); font-size: clamp(2.6rem, 6vw, 5.5rem); font-weight: 400; line-height: 1.05; color: var(--ink); }
+  h2 { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.6rem); font-weight: 400; line-height: 1.2; color: var(--ink); }
+  h3 { font-family: var(--sans); font-size: 1rem; font-weight: 700; color: var(--ink); }
+  h4 { font-family: var(--mono); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-light); }
+  p { color: var(--ink-mid); line-height: 1.75; }
+  strong { color: var(--ink); font-weight: 700; }
+
+  /* TAGS */
+  .tag { display: inline-block; padding: 0.2rem 0.6rem; font-family: var(--mono); font-size: 0.61rem; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 3px; background: var(--bg-warm); color: var(--ink-mid); border: 1px solid var(--rule); font-weight: 500; }
+  .tag-blue { background: rgba(26,74,144,0.09); color: #1A4A90; border-color: rgba(26,74,144,0.28); }
+  .tag-warm { background: rgba(184,78,34,0.09); color: #B84E22; border-color: rgba(184,78,34,0.28); }
+  .tag-green { background: var(--green-bg); color: var(--green); border-color: var(--green-border); }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
+
+  /* BUTTONS */
+  .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.72rem 1.5rem; font-family: var(--mono); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; border-radius: 3px; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); }
+  .btn-secondary { background: transparent; color: var(--ink); border: 1.5px solid #AAAAAA; }
+  .btn-secondary:hover { border-color: var(--ink-mid); transform: translateY(-1px); }
+
+  /* CLEARANCE BADGE */
+  .clearance-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(26,74,144,0.09); border: 1px solid rgba(26,74,144,0.3); border-radius: 3px; padding: 0.38rem 0.75rem; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .clearance-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: blink 2s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+  /* HERO */
+  .hero { padding: 5rem 0 4rem; }
+  .hero-grid { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 3rem; }
+  .hero-eyebrow { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.75rem; }
+  .hero-eyebrow::before { content:''; display:inline-block; width:2rem; height:1px; background:var(--accent); }
+  .hero h1 { margin-bottom: 1.25rem; }
+  .hero-subtitle { font-size: 1rem; color: var(--ink-mid); max-width: 560px; margin-bottom: 2rem; line-height: 1.8; }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .hero-stats { display: flex; flex-direction: column; gap: 1.25rem; padding: 1.75rem; background: var(--card-bg); border: 1.5px solid var(--rule); border-radius: 6px; min-width: 165px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+  .stat-item { text-align: center; }
+  .stat-num { font-family: var(--serif); font-size: 2.2rem; color: var(--ink); line-height: 1; display: block; }
+  .stat-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-light); margin-top: 0.25rem; display: block; }
+  .stat-rule { border: none; border-top: 1px solid var(--rule); }
+
+  /* FEATURED STRIP */
+  .featured-strip { display: grid; grid-template-columns: repeat(3, 1fr); border: 1.5px solid var(--rule); border-radius: 6px; overflow: hidden; margin-top: 3rem; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+  .featured-item { padding: 1.6rem; background: var(--card-bg); border-right: 1px solid var(--rule); transition: background 0.2s; }
+  .featured-item:last-child { border-right: none; }
+  .featured-item:hover { background: #EEF3FF; }
+  .featured-org { font-family: var(--mono); font-size: 0.61rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+  .featured-title { font-size: 0.95rem; font-weight: 700; color: var(--ink); margin-bottom: 0.4rem; }
+  .featured-desc { font-size: 0.83rem; color: var(--ink-mid); line-height: 1.65; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px,1fr)); gap: 1.25rem; margin-top: 2rem; }
+  .skill-group { padding: 1.4rem; background: var(--card-bg); border: 1.5px solid var(--rule); border-radius: 6px; }
+  .skill-group h4 { margin-bottom: 0.9rem; }
+  .skill-group ul { list-style: none; }
+  .skill-group ul li { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-mid); padding: 0.26rem 0; border-bottom: 1px solid var(--rule); display: flex; align-items: center; gap: 0.5rem; }
+  .skill-group ul li:last-child { border-bottom: none; }
+  .skill-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+  /* ===== EXPANDABLE CARD SYSTEM ===== */
+  .card-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+
+  .exp-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .exp-card:hover { border-color: rgba(26,74,144,0.3); box-shadow: 0 2px 16px rgba(26,74,144,0.06); }
+
+  .exp-card-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.4rem 1.6rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .exp-card-header:hover .expand-btn { color: var(--accent); }
+
+  .exp-card-meta { display: flex; flex-direction: column; gap: 0.2rem; }
+  .exp-card-org { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+  .exp-card-title { font-size: 1rem; font-weight: 700; color: var(--ink); }
+  .exp-card-sub { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-light); margin-top: 0.1rem; }
+  .exp-card-summary { font-size: 0.88rem; color: var(--ink-mid); line-height: 1.65; margin-top: 0.4rem; max-width: 680px; }
+
+  .exp-card-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; flex-shrink: 0; }
+
+  .expand-btn {
+    font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-light);
+    background: none; border: 1px solid var(--rule); border-radius: 3px;
+    padding: 0.3rem 0.7rem; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  }
+  .expand-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .expand-btn.open { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  .exp-card-body {
+    display: none;
+    border-top: 1px solid var(--rule);
+    padding: 1.6rem;
+    background: #FAFAF8;
+  }
+  .exp-card-body.open { display: block; }
+
+  .exp-card-body h4 { margin-bottom: 0.75rem; margin-top: 1.5rem; }
+  .exp-card-body h4:first-child { margin-top: 0; }
+
+  .detail-bullets { list-style: none; padding: 0; margin-bottom: 1rem; }
+  .detail-bullets li { font-size: 0.9rem; color: var(--ink-mid); padding: 0.28rem 0; border-bottom: 1px solid #F0EEEA; line-height: 1.7; }
+  .detail-bullets li:last-child { border-bottom: none; }
+
+  .pdf-embed { width: 100%; height: 700px; border: 1px solid var(--rule); border-radius: 6px; margin-top: 0.5rem; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 270px 1fr; gap: 4rem; align-items: start; }
+  .about-sidebar { position: sticky; top: 80px; }
+  .profile-block { background: var(--card-bg); border: 1.5px solid var(--rule); border-radius: 6px; padding: 1.75rem; text-align: center; }
+  .profile-name { font-family: var(--serif); font-size: 1.35rem; margin-bottom: 0.2rem; color: var(--ink); }
+  .profile-title { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); }
+  .contact-list { list-style: none; text-align: left; margin-top: 1.25rem; }
+  .contact-list li { display: flex; align-items: flex-start; gap: 0.7rem; padding: 0.45rem 0; border-bottom: 1px solid var(--rule); font-size: 0.82rem; color: var(--ink-mid); }
+  .contact-list li:last-child { border-bottom: none; }
+  .contact-icon { font-family: var(--mono); font-size: 0.6rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; min-width: 42px; padding-top: 2px; }
+  .about-body p { margin-bottom: 1.2rem; font-size: 0.94rem; }
+
+  .extra-list { display: flex; flex-direction: column; margin-top: 1.25rem; }
+  .extra-entry { padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+  .extra-entry:last-child { border-bottom: none; }
+  .extra-title { font-size: 0.94rem; font-weight: 700; color: var(--ink); margin-bottom: 0.15rem; }
+  .extra-sub { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-light); letter-spacing: 0.06em; margin-bottom: 0.45rem; }
+  .extra-bullets { list-style: none; padding: 0; }
+  .extra-bullets li { font-size: 0.86rem; color: var(--ink-mid); padding: 0.18rem 0; line-height: 1.65; }
+
+  .edu-entry { display: grid; grid-template-columns: 160px 1fr; gap: 1.5rem; padding: 1.6rem 0; border-bottom: 1px solid var(--rule); }
+  .edu-entry:last-child { border-bottom: none; }
+  .edu-date { font-family: var(--mono); font-size: 0.66rem; color: var(--ink-light); padding-top: 0.2rem; }
+  .edu-entry h3 { font-size: 0.96rem; margin-bottom: 0.28rem; }
+  .edu-degree { font-size: 0.86rem; color: var(--ink-mid); margin-bottom: 0.3rem; }
+  .edu-gpa { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); }
+  .edu-honors { font-size: 0.8rem; color: var(--ink-light); font-style: italic; margin-top: 0.2rem; line-height: 1.6; }
+
+  /* FUTURE GOALS */
+  .future-goals-block { border: 1.5px solid var(--green-border); border-radius: 6px; overflow: hidden; margin-top: 3rem; }
+  .future-goals-header { background: var(--green-bg); border-bottom: 1px solid var(--green-border); padding: 1.25rem 1.75rem; display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; }
+  .future-goals-header h3 { color: var(--green); font-size: 0.96rem; margin-bottom: 0.15rem; }
+  .future-goals-header p { font-size: 0.82rem; color: var(--ink-light); }
+  .future-goals-toggle { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); flex-shrink: 0; margin-left: 1rem; background: none; border: 1px solid var(--green-border); border-radius: 3px; padding: 0.3rem 0.7rem; cursor: pointer; }
+  .future-goals-body { padding: 1.75rem; background: var(--card-bg); display: none; }
+  .future-goals-body.open { display: block; }
+  .future-goals-body p { font-size: 0.9rem; margin-bottom: 1rem; }
+  .space-ag-goals { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px,1fr)); gap: 1rem; margin: 1.5rem 0; }
+  .space-ag-goal { background: var(--bg-warm); border: 1px solid var(--rule); border-radius: 5px; padding: 1.1rem; }
+  .space-ag-goal h4 { color: var(--green); margin-bottom: 0.4rem; }
+  .space-ag-goal p { font-size: 0.82rem; }
+
+  /* H-RULE */
+  .h-rule { display: flex; align-items: center; gap: 1rem; margin: 2.5rem 0; }
+  .h-rule::before, .h-rule::after { content:''; flex:1; height:1px; background:var(--rule); }
+  .h-rule span { font-family: var(--mono); font-size: 0.61rem; color: var(--ink-light); letter-spacing: 0.15em; text-transform: uppercase; white-space: nowrap; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--rule); padding: 2.25rem 0; margin-top: 2.5rem; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-name { font-family: var(--serif); font-size: 1.15rem; color: var(--ink); }
+  .footer-contact { font-family: var(--mono); font-size: 0.66rem; color: var(--ink-light); letter-spacing: 0.08em; text-align: right; line-height: 1.9; }
+  .footer-contact a { color: var(--accent); text-decoration: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .nav-links a { padding: 0 0.65rem; font-size: 0.66rem; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-stats { flex-direction: row; min-width: auto; justify-content: space-around; }
+    .stat-rule { display: none; }
+    .featured-strip { grid-template-columns: 1fr; }
+    .featured-item { border-right: none; border-bottom: 1px solid var(--rule); }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-sidebar { position: static; }
+    .footer-inner { flex-direction: column; text-align: center; }
+    .footer-contact { text-align: center; }
+    .exp-card-header { grid-template-columns: 1fr; }
+    .exp-card-right { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 1.25rem; }
+    .container { padding: 0 1.25rem; }
+    .section { padding: 3rem 0; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    h1 { font-size: 2.4rem; }
+    .hero { padding: 3.5rem 0 2.5rem; }
+    .edu-entry { grid-template-columns: 1fr; }
+    .space-ag-goals { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .pdf-embed { height: 400px; }
+    .footer-inner { flex-direction: column; text-align: center; }
+    .footer-contact { text-align: center; }
+  }
+
+  @media (max-width: 380px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo" onclick="showPage('home')">LE</span>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a onclick="showPage('about')" id="nav-about">About</a></li>
+    <li><a onclick="showPage('experience')" id="nav-experience">Experience</a></li>
+    <li><a onclick="showPage('projects')" id="nav-projects">Projects</a></li>
+    <li><a onclick="showPage('research')" id="nav-research">Research</a></li>
+  </ul>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a onclick="showPage('home');closeMenu()" id="mob-home" class="active">Home</a>
+  <a onclick="showPage('about');closeMenu()" id="mob-about">About</a>
+  <a onclick="showPage('experience');closeMenu()" id="mob-experience">Experience</a>
+  <a onclick="showPage('projects');closeMenu()" id="mob-projects">Projects</a>
+  <a onclick="showPage('research');closeMenu()" id="mob-research">Research</a>
+</div>
+
+<!-- ======================== HOME ======================== -->
+<div id="page-home" class="page active">
+<div class="container">
+  <div class="hero section">
+    <div class="hero-grid">
+      <div>
+        <div class="clearance-badge"><span class="clearance-dot"></span>DoD Interim Secret Security Clearance</div>
+        <div class="hero-eyebrow">Mechanical Engineer</div>
+        <h1>Luke<br>Esperiquette</h1>
+        <p class="hero-subtitle">BS Mechanical Engineering, Cal Poly Pomona. Aerospace researcher, building automation engineer, and hands-on builder with experience spanning NASA JPL, the Air Force, and Siemens.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-primary" onclick="showPage('experience')">View Experience</button>
+          <button class="btn btn-secondary" onclick="showPage('projects')">See Projects</button>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><span class="stat-num">3.47</span><span class="stat-label">GPA</span></div>
+        <hr class="stat-rule">
+        <div class="stat-item"><span class="stat-num">4</span><span class="stat-label">Research Programs</span></div>
+        <hr class="stat-rule">
+        <div class="stat-item"><span class="stat-num">8</span><span class="stat-label">Projects</span></div>
+      </div>
+    </div>
+
+    <div class="featured-strip">
+      <div class="featured-item">
+        <div class="featured-org">NASA — JPL</div>
+        <div class="featured-title">WISTLS Sampling Drill</div>
+        <div class="featured-desc">Designed a compact auger drill for lunar regolith sampling in collaboration with NASA JPL engineers, meeting strict mass, power, and geometric constraints for the 2027 lunar rover mission.</div>
+        <div class="tags" style="margin-top:0.75rem;"><span class="tag tag-blue">Senior Project</span><span class="tag">SolidWorks</span><span class="tag">2025</span></div>
+      </div>
+      <div class="featured-item">
+        <div class="featured-org">Air Force — Edwards AFB</div>
+        <div class="featured-title">F-16 Simulator Reverse Engineering</div>
+        <div class="featured-desc">Collected precise measurements and rebuilt a full 3D SolidWorks model of the F-16 Simulator. Presented to 812th Test Squadron engineers.</div>
+        <div class="tags" style="margin-top:0.75rem;"><span class="tag tag-blue">Engineering Internship</span><span class="tag">2024</span></div>
+      </div>
+      <div class="featured-item">
+        <div class="featured-org">Siemens — Fremont, CA</div>
+        <div class="featured-title">Smart Building Specialist</div>
+        <div class="featured-desc">Field commissioning, BAS troubleshooting, and cross-team collaboration supporting $1.4M in projected revenue growth across NorCal.</div>
+        <div class="tags" style="margin-top:0.75rem;"><span class="tag tag-blue">Current Role</span><span class="tag">BACnet</span><span class="tag">APOGEE</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="section-label">Technical Skills</span>
+    <h2>Tools &amp; Capabilities</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>CAD &amp; Design</h4>
+        <ul>
+          <li><span class="skill-dot"></span>SolidWorks</li>
+          <li><span class="skill-dot"></span>OnShape</li>
+          <li><span class="skill-dot"></span>SketchUp</li>
+          <li><span class="skill-dot"></span>3D Printing</li>
+          <li><span class="skill-dot"></span>Laser Cutting</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Programming</h4>
+        <ul>
+          <li><span class="skill-dot"></span>Python</li>
+          <li><span class="skill-dot"></span>C++</li>
+          <li><span class="skill-dot"></span>MATLAB</li>
+          <li><span class="skill-dot"></span>Linux / Unix</li>
+          <li><span class="skill-dot"></span>GitHub</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Systems &amp; Tools</h4>
+        <ul>
+          <li><span class="skill-dot"></span>BACnet / APOGEE</li>
+          <li><span class="skill-dot"></span>Power BI / SieSales</li>
+          <li><span class="skill-dot"></span>Pix4DFields</li>
+          <li><span class="skill-dot"></span>Raspberry Pi / Arduino</li>
+          <li><span class="skill-dot"></span>G Suite / MS Office</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Engineering Domains</h4>
+        <ul>
+          <li><span class="skill-dot"></span>Aerospace Testing</li>
+          <li><span class="skill-dot"></span>Building Automation</li>
+          <li><span class="skill-dot"></span>Thermal / Fluids</li>
+          <li><span class="skill-dot"></span>FEA / CFD</li>
+          <li><span class="skill-dot"></span>Renewable Energy Systems</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container"><footer><div class="footer-inner">
+  <span class="footer-name">Luke Esperiquette</span>
+  <div class="footer-contact"><div>Daly City, CA</div><div><a href="mailto:avxblack@gmail.com">avxblack@gmail.com</a> &nbsp;·&nbsp; (909) 652-2587</div></div>
+</div></footer></div>
+</div>
+
+<!-- ======================== ABOUT ======================== -->
+<div id="page-about" class="page">
+<div class="container">
+  <div class="section">
+    <span class="section-label">About</span>
+    <div class="about-grid">
+      <div class="about-sidebar">
+        <div class="profile-block">
+          <div class="profile-name">Luke Esperiquette</div>
+          <div class="profile-title">Mechanical Engineer</div>
+          <ul class="contact-list">
+            <li><span class="contact-icon">Email</span>avxblack@gmail.com</li>
+            <li><span class="contact-icon">Phone</span>(909) 652-2587</li>
+            <li><span class="contact-icon">Based</span>Daly City, CA</li>
+            <li><span class="contact-icon">Clear.</span>DoD Interim Secret</li>
+          </ul>
+        </div>
+        <div class="skill-group" style="margin-top:1.1rem;">
+          <h4>Degrees</h4>
+          <ul>
+            <li><span class="skill-dot"></span>B.S. Mechanical Eng.</li>
+            <li><span class="skill-dot"></span>A.S. Pre-Engineering</li>
+            <li><span class="skill-dot"></span>A.A. Language Arts</li>
+            <li><span class="skill-dot"></span>A.S. Mathematics</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="about-body">
+        <h2>Engineer. Researcher.<br><em>Builder.</em></h2><br>
+        <p>I'm a Mechanical Engineering graduate from Cal Poly Pomona with a record of crossing disciplines — from lunar drill design at NASA JPL to hands-on BAS commissioning at Siemens to building a quantum-assisted security robot for the STARS program.</p>
+        <p>My foundation is hands-on. I've restored a 1974 VW Baja Bug from the ground up, installed two off-grid solar systems, and built engineering hardware that has been presented to NASA JPL, Northrop Grumman, congressional representatives, and U.S. Senate offices.</p>
+        <p>At Siemens I developed practical expertise in building automation systems — running and terminating low-voltage wiring, commissioning APOGEE field controllers, testing BACnet networks, and diagnosing faults in the field. That hands-on instinct combined with a strong analytical foundation is what I bring to every project.</p>
+        <p>I hold a DoD Interim Secret Security Clearance and am actively seeking engineering roles and research opportunities where I can apply mechanical design, systems thinking, and field-level problem solving to meaningful challenges.</p>
+
+        <div class="h-rule"><span>Education</span></div>
+        <div>
+          <div class="edu-entry">
+            <div class="edu-date">Aug 2022 — Dec 2025</div>
+            <div>
+              <h3>California State Polytechnic University, Pomona</h3>
+              <div class="edu-degree">Bachelor of Science, Mechanical Engineering</div>
+              <div class="edu-gpa">GPA: 3.47 &nbsp;·&nbsp; Dean's List</div>
+              <div class="edu-honors">Student Engineering Leadership &amp; Communication Lab · SLCP · Singularity Rocket Project · Exo-Bronco · STARS · MEP · SEES Mentor · Baja SAE · ASME · SHPE</div>
+              <div class="tags" style="margin-top:0.6rem;"><span class="tag tag-blue">Dean's List</span><span class="tag">Mechanical Engineering</span></div>
+            </div>
+          </div>
+          <div class="edu-entry">
+            <div class="edu-date">Aug 2018 — Jun 2023</div>
+            <div>
+              <h3>Citrus College</h3>
+              <div class="edu-degree">A.S. Pre-Engineering &nbsp;·&nbsp; A.A. Language Arts &nbsp;·&nbsp; A.S. Mathematics</div>
+              <div class="edu-gpa">GPA: 3.59</div>
+              <div class="edu-honors">Edison Scholarship Recipient · Dean's List · President's List · STEM TRIO · Pathways to STEM · STARS Program</div>
+              <div class="tags" style="margin-top:0.6rem;"><span class="tag tag-blue">Edison Scholar</span><span class="tag">President's List</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="h-rule"><span>Extracurriculars &amp; Leadership</span></div>
+        <div class="extra-list">
+          <div class="extra-entry">
+            <div class="extra-title">SLCP — Director of Outreach, College of Engineering</div>
+            <div class="extra-sub">Society of Law, Contracts and Property · Cal Poly Pomona · Mar 2023 – Present</div>
+            <ul class="extra-bullets">
+              <li>Organized a collaborative event between SLCP and ASME.</li>
+              <li>Served as MC for an SLCP chapter event.</li>
+            </ul>
+          </div>
+          <div class="extra-entry">
+            <div class="extra-title">Singularity Rocket Project — Systems Liaison, Payload Subteam</div>
+            <div class="extra-sub">Cal Poly Pomona · Aug 2022 – May 2023</div>
+            <ul class="extra-bullets">
+              <li>Developed risk assessment and mitigation charts for the payload subteam.</li>
+            </ul>
+          </div>
+          <div class="extra-entry">
+            <div class="extra-title">Exo-Bronco Multi-Stage Rocket Project — Recovery Team</div>
+            <div class="extra-sub">Cal Poly Pomona · Aug 2022 – May 2023</div>
+          </div>
+          <div class="extra-entry">
+            <div class="extra-title">SEES Mentor</div>
+            <div class="extra-sub">Cal Poly Pomona · Mar 2023 – Present</div>
+            <ul class="extra-bullets">
+              <li>Mentored students, supporting their academic and engineering development.</li>
+            </ul>
+          </div>
+          <div class="extra-entry">
+            <div class="extra-title">Baja SAE — Prospective Participant</div>
+            <div class="extra-sub">Cal Poly Pomona · Feb 2022 – Jun 2022</div>
+            <ul class="extra-bullets">
+              <li>Researched electronic box dehydration systems during early-stage team participation.</li>
+            </ul>
+          </div>
+          <div class="extra-entry">
+            <div class="extra-title">ASME &nbsp;·&nbsp; SHPE &nbsp;·&nbsp; MEP &nbsp;·&nbsp; Student Engineering Leadership &amp; Communication Lab</div>
+            <div class="extra-sub">Cal Poly Pomona · Member</div>
+          </div>
+        </div>
+
+        <div class="h-rule"><span>Additional Training</span></div>
+        <div class="extra-list">
+          <div class="extra-entry">
+            <div class="extra-title">Gravitational Waves &amp; Supercomputers — Workshop</div>
+            <div class="extra-sub">California State University, Fullerton · Aug 2022 · Dr. Lovelace</div>
+            <ul class="extra-bullets">
+              <li>Wrote Python code and accessed the Ocean supercomputer via computer terminal to simulate and visualize colliding black holes.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container"><footer><div class="footer-inner"><span class="footer-name">Luke Esperiquette</span><div class="footer-contact"><a href="mailto:avxblack@gmail.com">avxblack@gmail.com</a></div></div></footer></div>
+</div>
+
+<!-- ======================== EXPERIENCE ======================== -->
+<div id="page-experience" class="page">
+<div class="container">
+  <div class="section">
+    <span class="section-label">Work History</span>
+    <h2>Experience</h2>
+    <p style="max-width:580px;margin-top:0.75rem;font-size:0.94rem;">Hands-on engineering and technical roles in building automation systems, aerospace testing, and defense engineering.</p>
+
+    <div class="card-list">
+
+      <!-- Siemens current -->
+      <div class="exp-card">
+        <div class="exp-card-header" onclick="toggleCard('exp1')">
+          <div class="exp-card-meta">
+            <span class="exp-card-org">Siemens &nbsp;·&nbsp; Fremont, CA</span>
+            <span class="exp-card-title">Smart Building Sales Specialist</span>
+            <span class="exp-card-sub">Aug 2025 – Present &nbsp;·&nbsp; Hybrid</span>
+            <p class="exp-card-summary">Supporting $1.4M in projected revenue growth across NorCal through data analysis, cross-team collaboration, and regional growth strategy.</p>
+            <div class="tags"><span class="tag tag-blue">Current</span><span class="tag">Power BI</span><span class="tag">SieSales</span><span class="tag">BAS</span></div>
+          </div>
+          <div class="exp-card-right">
+            <button class="expand-btn" id="btn-exp1">View Details</button>
+          </div>
+        </div>
+        <div class="exp-card-body" id="exp1">
+          <h4>Responsibilities</h4>
+          <ul class="detail-bullets">
+            <li>Supported sales and account management by conducting data analysis, using reporting tools (PowerBI, SieSales) to track performance, and contributing to regional growth strategy.</li>
+            <li>Partnered with fire, security, and solutions sales teams to deliver integrated solutions and drive <strong>$1.4M projected revenue growth</strong>.</li>
+            <li>Organized a 2-day event hosting 200 people across cross-functional teams.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Siemens intern -->
+      <div class="exp-card">
+        <div class="exp-card-header" onclick="toggleCard('exp2')">
+          <div class="exp-card-meta">
+            <span class="exp-card-org">Siemens &nbsp;·&nbsp; Fremont, CA</span>
+            <span class="exp-card-title">Smart Building Specialist Intern</span>
+            <span class="exp-card-sub">May 2025 – Aug 2025 &nbsp;·&nbsp; On-site</span>
+            <p class="exp-card-summary">Hands-on field role commissioning and troubleshooting building automation systems across commercial, healthcare, and educational facilities alongside Siemens technicians and subcontractors.</p>
+            <div class="tags"><span class="tag">BACnet</span><span class="tag">APOGEE</span><span class="tag">HVAC</span><span class="tag">Commissioning</span><span class="tag">Low-Voltage</span></div>
+          </div>
+          <div class="exp-card-right">
+            <button class="expand-btn" id="btn-exp2">View Details</button>
+          </div>
+        </div>
+        <div class="exp-card-body" id="exp2">
+          <h4>Responsibilities</h4>
+          <ul class="detail-bullets">
+            <li>Deployed and commissioned building automation systems across commercial, healthcare, educational, and mixed-use facilities, working alongside Siemens field technicians and subcontractors.</li>
+            <li>Performed hands-on installation work including running and terminating low-voltage wiring, mounting and wiring field controllers and sensors, and conducting point-to-point checkout to verify hardware communication.</li>
+            <li>Worked directly on APOGEE-based field controllers and BACnet physical networks — tested 24V and analog signals with a multimeter, verified device addressing, downloaded programs, and confirmed mechanical equipment was responding correctly to automation commands.</li>
+            <li>Troubleshot existing BAS systems in the field by checking terminations, tracing wiring faults, and diagnosing communication issues between field devices and the network.</li>
+            <li>Diagnosed and resolved field issues through root-cause troubleshooting — including identifying a loose mechanical connection inside a control enclosure and tracing a field-level network cable fault device-by-device until locating and replacing the faulty cable segment to restore device communication.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Air Force -->
+      <div class="exp-card">
+        <div class="exp-card-header" onclick="toggleCard('exp3')">
+          <div class="exp-card-meta">
+            <span class="exp-card-org">Air Force Civilian Service — 812th Test Squadron &nbsp;·&nbsp; Edwards AFB, CA</span>
+            <span class="exp-card-title">General Engineer</span>
+            <span class="exp-card-sub">May 2024 – Aug 2024 &nbsp;·&nbsp; On-site</span>
+            <p class="exp-card-summary">Reverse-engineered an F-16 Simulator and conducted R&amp;D at the Test Pilot School under DoD Interim Secret Security Clearance.</p>
+            <div class="tags"><span class="tag tag-warm">DoD Interim Secret Security Clearance</span><span class="tag">SolidWorks</span><span class="tag">Reverse Engineering</span></div>
+          </div>
+          <div class="exp-card-right">
+            <button class="expand-btn" id="btn-exp3">View Details</button>
+          </div>
+        </div>
+        <div class="exp-card-body" id="exp3">
+          <h4>Responsibilities</h4>
+          <ul class="detail-bullets">
+            <li>Reverse-engineered an F-16 Simulator by collecting precise measurements and building a full 3D SolidWorks model, presenting findings to 812th Test Squadron engineers.</li>
+            <li>Conducted R&amp;D at the Test Pilot School: T-2 Mod Process Analysis, T-38 TM Tray Issue Analysis, utilizing hot air and traditional soldering, laser cutter, graphic design, and 3D printing.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="container"><footer><div class="footer-inner"><span class="footer-name">Luke Esperiquette</span><div class="footer-contact"><a href="mailto:avxblack@gmail.com">avxblack@gmail.com</a></div></div></footer></div>
+</div>
+
+<!-- ======================== PROJECTS ======================== -->
+<div id="page-projects" class="page">
+<div class="container">
+  <div class="section">
+    <span class="section-label">Portfolio</span>
+    <h2>Projects</h2>
+    <p style="max-width:580px;margin-top:0.75rem;font-size:0.94rem;">Engineering projects from aerospace-grade hardware to off-grid energy systems.</p>
+
+    <div class="card-list">
+
+      <!-- Vertical Injection Molding Machine -->
+      <div class="exp-card">
+        <div class="exp-card-header" onclick="toggleCard('proj0')">
+          <div class="exp-card-meta">
+            <span class="exp-card-org">Cal Poly Pomona &nbsp;·&nbsp; Machine Design Project</span>
+            <span class="exp-card-title">Vertical Injection Molding Machine</span>
+            <span class="exp-card-sub">Cal Poly Pomona</span>
+            <p class="exp-card-summary">Designed and built a functional vertical thermoplastic injection molding machine, including a high-torque backup drive system achieving an estimated 2,750 lb-ft of closing force.</p>
+            <div class="tags"><span class="tag">Manufacturing</span><span class="tag">Mechanical Design</span><span class="tag">Machining</span><span class="tag">Fabrication</span></div>
+          </div>
+          <div class="exp-card-right">
+            <button class="expand-btn" id="btn-proj0">View Details</button>
+          </div>
+        </div>
+        <div class="exp-card-body" id="proj0">
+          <h4>Project Detail</h4>
+          <ul class="detail-bullets">
+            <li>Designed and built a functional vertical thermoplastic injection molding machine.</li>
+            <li>Engineered a high-torque backup drive system using a repurposed 1000 ft-lb drill and a custom lever clamp, achieving an estimated 2,750 lb-ft of closing force.</li>
+            <li>Implemented a spring-loaded middle plate and threaded rod frame architecture to optimize assembly time and reduce material costs.</li>
+            <li>Machined critical custom components, including motor-to-lead screw and clamp-to-mold adapters, using a lathe and drill press.</li>
+            <li>Conducted system electrical wiring, mechanical tolerance verification, and load testing.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- UAV Drop Mechanism - 2023 -->
+      <div class="exp-card">
+        <div class="exp-card-header" onclick="toggleCard('proj1')">
+          <div class="exp-card-meta">
+            <span class="exp-card-org">Cal Poly Pomona</span>
+            <span class="exp-card-title">UAV Controlled Drop Mechanism</span>
+            <span class="exp-card-sub">Aug 2023 – Nov 2023</span>
+            <p class="exp-card-summary">Led a team of 4 to design a fully mechanical 3D-printed attachment for the DJI Mavic Air 2 — 12g, $0.67 cost, delivers a 150g payload over 100 yards with no electronics required.</p>
+            <div class="tags"><span class="tag">CAD</span><span class="tag">3D Printing</span><span class="tag">UAV</span><span class="tag">Team Lead</span></div>
+          </div>
+          <div class="exp-card-right">
+            <button class="expand-btn" id="btn-proj1">View Details</button>
+          </div>
+        </div>
+        <div class="exp-card-body" id="proj1">
+          <h4>Project Detail</h4>
+          <ul class="detail-bullets">
+            <li>Led a team of 4 through the full design, build, and test cycle for a UAV payload delivery attachment.</li>
+            <li>Designed a fully mechanical solution that eliminated the need for electronic components, reducing cost to $0.67 and weight to 12g.</li>
+            <li>3D-printed attachment mounts to the DJI Mavic Air 2 and delivers a 150g payload over 100 yards without landing.</li>
+            <li>Payload release is automated through a controlled flight maneuver, designed to avoid interference with the drone's sensors and propellers.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- HoneyBee - 2022 -->
+      <div class="exp-card">
+        <div class="exp-card-header" onclick="toggleCard('proj2')">
+          <div class="exp-card-meta">
+            <span class="exp-card-org">Citrus College</span>
+            <span class="exp-card-title">HoneyBee Robotics Design Challenge</span>
+            <span class="exp-card-sub">Jan 2022 – Mar 2022</span>
+            <p class="exp-card-summary">Cryogenic Seal Test Fixture Design Challenge for NASA's 2027 Titan Dragonfly Mission. Led a 4-person team and presented findings directly to Honeybee Robotics engineers.</p>
+            <div class="tags"><span class="tag">SketchUp</span><span class="tag">NASA</span><span class="tag">Cryogenic Systems</span><span class="tag">Team Lead</span></div>
+          </div>
+          <div class="exp-card-right">
+            <button class="expand-btn" id="btn-proj2">View Details</button>
+          </div>
+        </div>
+        <div class="exp-card-body" id="proj2">
+          <h4>Project Detail</h4>
+          <ul class="detail-bullets">
+            <li>Competed in Honeybee Robotics' Cryogenic Seal Test Fixture Design Challenge for NASA's 2027 Titan Dragonfly Mission.</li>
+            <li>Led a 4-person team to research design requirements, vacuum chambers, and subsystem interdependencies.</li>
+            <li>Utilized SketchUp and G Suite for design and collaboration.</li>
+            <li>Presented final design directly to Honeybee Robotics engineers.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 2760W Solar - 2022 -->
+      <div class="exp-card">
+        <div class="exp-card-header" onclick="toggleCard('proj3')">
+          <div class="exp-card-meta">
+            <span class="exp-card-org">Personal Project</span>
+            <span class="exp-card-title">2,760W Off-Grid Solar Installation</span>
+            <span class="exp-card-sub">Aug 2022</span>
+            <p class="exp-card-summary">Led a team of 3 to design and install a high-voltage off-grid solar system — 13 panels, 8-battery bank, dual charge controllers. Wired as a 24V series/parallel architecture.</p>
+            <div class="tags"><span class="tag">Solar PV</span><span class="tag">Electrical Systems</span><span class="tag">Hardware</span></div>
+          </div>
+          <div class="exp-card-right">
+            <button class="expand-btn" id="btn-proj3">View Details</button>
+          </div>
+        </div>
+        <div class="exp-card-body" id="proj3">
+          <h4>Project Detail</h4>
+          <ul class="detail-bullets">
+            <li>Led a team of 3 to design and install a complete off-grid solar system for a trailer.</li>
+            <li>System specs: 12x230W solar panels, 2x60A charge controllers, 8 batteries wired in a series/parallel 24V bank, and an inverter.</li>
+            <li>Researched and implemented series/parallel wiring architecture for optimal voltage and capacity.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 990W Solar - 2022 -->
+      <div class="exp-card">
+        <div class="exp-card-header" onclick="toggleCard('proj4')">
+          <div class="exp-card-meta">
+            <span class="exp-card-org">Personal Project</span>
+            <span class="exp-card-title">990W Off-Grid Solar Installation</span>
+            <span class="exp-card-sub">Jul 2022 – Aug 2022</span>
+            <p class="exp-card-summary">Designed and installed an off-grid solar system with 5 panels, dual charge controllers, 7 batteries, and 2 inverters. Researched series vs. parallel configurations.</p>
+            <div class="tags"><span class="tag">Solar PV</span><span class="tag">Electrical Systems</span></div>
+          </div>
+          <div class="exp-card-right">
+            <button class="expand-btn" id="btn-proj4">View Details</button>
+          </div>
+        </div>
+        <div class="exp-card-body" id="proj4">
+          <h4>Project Detail</h4>
+          <ul class="detail-bullets">
+            <li>Designed and installed an off-grid solar system for a trailer: 5 panels (22Vmp, 9Imp), dual charge controllers (13V/11A and 100V/40A), 7 12V batteries, and 2 inverters.</li>
+            <li>Researched parallel vs. series configurations — wired 4 panels in series into the 100V/40A controller feeding a 24V battery bank, and 1 panel into the 13V/11A controller feeding a single 12V battery.</li>
+            <li>Configured 6 batteries in 3 banks of 2, each bank wired in series for 24V output, then banks wired in parallel.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Oscillating Wind Turbine - 2022 -->
+      <div class="exp-card">
+        <div class="exp-card-header" onclick="toggleCard('proj5')">
+          <div class="exp-card-meta">
+            <span class="exp-card-org">Citrus College</span>
+            <span class="exp-card-title">Oscillating Wind Turbine</span>
+            <span class="exp-card-sub">Feb 2022 – Jun 2022</span>
+            <p class="exp-card-summary">Researched, designed, and built a functional 4V oscillating wind turbine from junkyard parts for a Thermodynamics and Electromagnetism semester project — zero budget.</p>
+            <div class="tags"><span class="tag">Thermodynamics</span><span class="tag">Electromagnetism</span><span class="tag">Prototyping</span></div>
+          </div>
+          <div class="exp-card-right">
+            <button class="expand-btn" id="btn-proj5">View Details</button>
+          </div>
+        </div>
+        <div class="exp-card-body" id="proj5">
+          <h4>Project Detail</h4>
+          <ul class="detail-bullets">
+            <li>Semester project for Physics: Thermodynamics and Electromagnetism at Citrus College.</li>
+            <li>Researched oscillating wind turbine design and sourced all components from junkyard materials at zero cost.</li>
+            <li>Built a functional prototype generating 4V output.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- VW Bug - 2019-2020 -->
+      <div class="exp-card">
+        <div class="exp-card-header" onclick="toggleCard('proj6')">
+          <div class="exp-card-meta">
+            <span class="exp-card-org">Personal Project</span>
+            <span class="exp-card-title">1974 VW Baja Bug Restoration</span>
+            <span class="exp-card-sub">Aug 2019 – Dec 2020</span>
+            <p class="exp-card-summary">18-month hands-on mechanical restoration covering brakes, drivetrain, fuel system, electrical, and paint preparation.</p>
+            <div class="tags"><span class="tag">Mechanical Systems</span><span class="tag">Drivetrain</span><span class="tag">Restoration</span></div>
+          </div>
+          <div class="exp-card-right">
+            <button class="expand-btn" id="btn-proj6">View Details</button>
+          </div>
+        </div>
+        <div class="exp-card-body" id="proj6">
+          <h4>Work Completed</h4>
+          <ul class="detail-bullets">
+            <li>Disk brake conversion, brake cylinder replacement, and wheel bearing maintenance.</li>
+            <li>Clutch replacement and spark plug replacement.</li>
+            <li>Transaxle swap, fuel cell swap, and alternator swap.</li>
+            <li>Full paint preparation.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Claw Machine - 2021 -->
+      <div class="exp-card">
+        <div class="exp-card-header" onclick="toggleCard('proj7')">
+          <div class="exp-card-meta">
+            <span class="exp-card-org">Citrus College</span>
+            <span class="exp-card-title">Claw Machine — Intro to Engineering</span>
+            <span class="exp-card-sub">Aug 2021 – Dec 2021</span>
+            <p class="exp-card-summary">Led a 5-student team to design and build a functional claw machine using SketchUp, hydraulic and electrical mechanisms, and materials totaling under $30.</p>
+            <div class="tags"><span class="tag">SketchUp</span><span class="tag">Hydraulics</span><span class="tag">Electrical</span><span class="tag">Team Lead</span></div>
+          </div>
+          <div class="exp-card-right">
+            <button class="expand-btn" id="btn-proj7">View Details</button>
+          </div>
+        </div>
+        <div class="exp-card-body" id="proj7">
+          <h4>Project Detail</h4>
+          <ul class="detail-bullets">
+            <li>Introduction to Engineering semester project at Citrus College.</li>
+            <li>Led a 5-student team from concept through working prototype.</li>
+            <li>Designed in SketchUp, incorporating hydraulic and electrical mechanisms with a total materials budget under $30.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="container"><footer><div class="footer-inner"><span class="footer-name">Luke Esperiquette</span><div class="footer-contact"><a href="mailto:avxblack@gmail.com">avxblack@gmail.com</a></div></div></footer></div>
+</div>
+
+<!-- ======================== RESEARCH ======================== -->
+<div id="page-research" class="page">
+<div class="container">
+  <div class="section">
+    <span class="section-label">Research</span>
+    <h2>Research &amp; Academic Work</h2>
+    <p style="max-width:680px;margin-top:0.5rem;font-size:0.94rem;color:var(--ink-mid);">Four funded research programs spanning aerospace hardware development, UAV-based environmental sensing, robotics, and fire detection.</p>
+
+    <div class="card-list" style="margin-top:2rem;">
+
+      <!-- NASA JPL - 2025 (newest) -->
+      <div class="exp-card">
+        <div class="exp-card-header" onclick="toggleCard('res1')">
+          <div class="exp-card-meta">
+            <span class="exp-card-org">NASA Jet Propulsion Laboratory &nbsp;·&nbsp; Pasadena, CA</span>
+            <span class="exp-card-title">WISTLS Sampling Drill — Design and Development</span>
+            <span class="exp-card-sub">Jan 2025 – Dec 2025 &nbsp;·&nbsp; Senior Project &nbsp;·&nbsp; Faculty Advisor: Prof. Behnam Bahr</span>
+            <p class="exp-card-summary">Designed a compact auger drill for lunar regolith sampling meeting strict NASA JPL requirements for the WISTLS instrument — working directly with JPL engineers on the 2027 lunar rover mission.</p>
+            <div class="tags"><span class="tag tag-warm">NASA JPL</span><span class="tag">SolidWorks</span><span class="tag">ISRU</span><span class="tag">Structural Analysis</span><span class="tag">Material Selection</span></div>
+          </div>
+          <div class="exp-card-right">
+            <button class="expand-btn" id="btn-res1">View Details</button>
+          </div>
+        </div>
+        <div class="exp-card-body" id="res1">
+          <h4>Overview</h4>
+          <ul class="detail-bullets">
+            <li>Project scope and technical requirements provided by NASA JPL as part of the WISTLS (Water Isotope Tunable Laser Spectrometer) mission. Worked directly with JPL engineers Kalind Carpenter, Lance Christensen, and Kevin Schwarm.</li>
+            <li>Designed a compact auger-based drill to collect a minimum of 20 grams of lunar regolith while operating under cryogenic temperatures, minimal power, and tight mass and volume constraints for small robotic landers.</li>
+            <li>Final design: 30mm cutting bit, helical auger flights, 5mm Ti-6Al-4V drive shaft, and a protective sheath. Total assembly mass: 36.3 grams. Estimated sample yield: 22.7 grams, exceeding the 20g requirement by 13.5%.</li>
+            <li>Identified a critical structural flaw in the original aluminum shaft design (Factor of Safety of 0.40 — would yield under expected loads). Redesigned using titanium Ti-6Al-4V with an increased shaft diameter, achieving a Factor of Safety of 2.70.</li>
+            <li>Design is optimized for metal additive manufacturing. Currently in ongoing collaboration with JPL to explore fabricating and physically testing the drill.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STARS Quantum Robot - 2023 -->
+      <div class="exp-card">
+        <div class="exp-card-header" onclick="toggleCard('res2')">
+          <div class="exp-card-meta">
+            <span class="exp-card-org">Cal Poly Pomona — STARS Program &nbsp;·&nbsp; Pomona, CA</span>
+            <span class="exp-card-title">Quantum-Enhanced Security Robot</span>
+            <span class="exp-card-sub">Jun 2023 – Aug 2023 &nbsp;·&nbsp; Paid Research &nbsp;·&nbsp; Dr. Farbod Khoshnoud</span>
+            <p class="exp-card-summary">Built a quantum-based security robot integrating computer vision, Arduino, and Raspberry Pi. Presented to NASA JPL, Northrop Grumman, congressional, and U.S. Senate representatives.</p>
+            <div class="tags"><span class="tag">Quantum Computing</span><span class="tag">Computer Vision</span><span class="tag">Raspberry Pi</span><span class="tag">Arduino</span><span class="tag">Python</span></div>
+          </div>
+          <div class="exp-card-right">
+            <button class="expand-btn" id="btn-res2">View Details</button>
+          </div>
+        </div>
+        <div class="exp-card-body" id="res2">
+          <h4>Overview</h4>
+          <ul class="detail-bullets">
+            <li>Built a quantum-based security robot by integrating a donated warehouse robot with a Quantum processing unit, PixyCam computer vision module, Arduino, and Raspberry Pi.</li>
+            <li>Programmed navigation and detection logic in Python and documented the project using G Suite.</li>
+            <li>Presented research outcomes to NASA JPL rep, Northrop Grumman rep, Congresswoman rep, U.S. Senator rep, and the College of Engineering Dean.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CSU Fullerton Fire Detection - Summer 2022 -->
+      <div class="exp-card">
+        <div class="exp-card-header" onclick="toggleCard('res3')">
+          <div class="exp-card-meta">
+            <span class="exp-card-org">California State University, Fullerton &nbsp;·&nbsp; Fullerton, CA</span>
+            <span class="exp-card-title">Forestry Fire Detection System – Undergraduate Researcher</span>
+            <span class="exp-card-sub">Summer 2022 &nbsp;·&nbsp; Undergraduate Research &nbsp;·&nbsp; Project RAISE</span>
+            <p class="exp-card-summary">Led a 2-person team to develop an automated fire detection system for Project RAISE.</p>
+            <div class="tags"><span class="tag">FLIR Thermal Imaging</span><span class="tag">Python</span><span class="tag">Raspberry Pi</span><span class="tag">IR Sensing</span><span class="tag">Symposium Presenter</span></div>
+          </div>
+          <div class="exp-card-right">
+            <button class="expand-btn" id="btn-res3">View Details</button>
+          </div>
+        </div>
+        <div class="exp-card-body" id="res3">
+          <h4>Overview</h4>
+          <ul class="detail-bullets">
+            <li>Led a team of 2 to develop a Forestry Fire Detection System using data collection with a Raspberry Pi, 700-1000nm Infrared Flame Sensor, Temperature Sensor, FLIR Thermal Imaging Camera, &amp; Python.</li>
+            <li>Presented at the 2022 Cal State Fullerton Research Symposium.</li>
+            <li>Advisor: Dr. Rakeshkumar Mahto — C.S. Dept.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STARS Agriculture UAV - Spring 2022 (oldest) -->
+      <div class="exp-card">
+        <div class="exp-card-header" onclick="toggleCard('res4')">
+          <div class="exp-card-meta">
+            <span class="exp-card-org">Cal Poly Pomona — STARS Program &nbsp;·&nbsp; Pomona, CA</span>
+            <span class="exp-card-title">Agriculture UAV / UGV Remote Sensing</span>
+            <span class="exp-card-sub">Spring 2022 &nbsp;·&nbsp; Paid Research &nbsp;·&nbsp; Dr. Subodh Bhandari</span>
+            <p class="exp-card-summary">Analyzed UAV-based NDVI data for nitrogen and water stress assessment in crops using Pix4DFields multispectral processing and drone operations.</p>
+            <div class="tags"><span class="tag">NDVI</span><span class="tag">Pix4DFields</span><span class="tag">UAV / UGV</span><span class="tag">Data Processing</span></div>
+          </div>
+          <div class="exp-card-right">
+            <button class="expand-btn" id="btn-res4">View Details</button>
+          </div>
+        </div>
+        <div class="exp-card-body" id="res4">
+          <h4>Overview</h4>
+          <ul class="detail-bullets">
+            <li>Collaborated on an Agriculture-Based UAV/UGV project to analyze NDVI (Normalized Difference Vegetation Index) data for nitrogen and water stress assessment in crops.</li>
+            <li>Utilized Pix4DFields for UAV-based multispectral data processing alongside drone operations and MS Office documentation.</li>
+            <li>Supervised by Dr. Subodh Bhandari (Aerospace Engineering Dept.).</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="h-rule"><span>Presentations &amp; Audiences</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-top:1.5rem;">
+      <div style="background:var(--card-bg);border:1.5px solid var(--rule);border-radius:6px;padding:1.4rem;">
+        <h3 style="margin-bottom:0.5rem;font-size:0.96rem;">Government &amp; Congressional</h3>
+        <p style="font-size:0.86rem;">Presented quantum robotics research to representatives of a U.S. Congresswoman and a U.S. Senator during the STARS program final review.</p>
+      </div>
+      <div style="background:var(--card-bg);border:1.5px solid var(--rule);border-radius:6px;padding:1.4rem;">
+        <h3 style="margin-bottom:0.5rem;font-size:0.96rem;">NASA JPL &amp; Northrop Grumman</h3>
+        <p style="font-size:0.86rem;">Presented to NASA JPL and Northrop Grumman representatives during STARS evaluation, and worked directly with JPL engineers on the senior project.</p>
+      </div>
+      <div style="background:var(--card-bg);border:1.5px solid var(--rule);border-radius:6px;padding:1.4rem;">
+        <h3 style="margin-bottom:0.5rem;font-size:0.96rem;">Academic Symposium</h3>
+        <p style="font-size:0.86rem;">Presented the Forestry Fire Detection System at the 2022 Cal State Fullerton Research Symposium before faculty, students, and visiting researchers.</p>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+<div class="container"><footer><div class="footer-inner">
+  <span class="footer-name">Luke Esperiquette</span>
+  <div class="footer-contact"><div>Daly City, CA</div><div><a href="mailto:avxblack@gmail.com">avxblack@gmail.com</a> &nbsp;·&nbsp; (909) 652-2587</div></div>
+</div></footer></div>
+</div>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.querySelectorAll('.mobile-menu a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    document.getElementById('nav-' + id).classList.add('active');
+    document.getElementById('mob-' + id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleCard(id) {
+    const body = document.getElementById(id);
+    const btn = document.getElementById('btn-' + id);
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open');
+    btn.classList.toggle('open');
+    btn.textContent = isOpen ? 'View Details' : 'Close';
+  }
+
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+
+  function closeMenu() {
+    document.getElementById('mobile-menu').classList.remove('open');
+  }
+
+  function toggleGoals() {
+    const body = document.getElementById('goals-body');
+    const toggle = document.getElementById('goals-toggle');
+    body.classList.toggle('open');
+    toggle.textContent = body.classList.contains('open') ? 'Hide' : 'Show';
+  }
+</script>
+</body>
+</html>
