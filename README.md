@@ -1,19 +1,20 @@
 # Luke Esperiquette | Mechanical Engineering Portfolio
 
-Welcome to my web-based portfolio! This project showcases my work, technical skills, and projects as a Mechanical Engineering student at Cal Poly Pomona and a Sales Support intern at Siemens.
+A web-based portfolio showcasing my technical background, research, and hands-on mechanical engineering projects.
 
-## 🚀 View the Live Site
-You can view my interactive portfolio here: 
-[https://esperiquette.github.io/WebHTML/](https://esperiquette.github.io/portfolio/)
-
-## 🛠 Tech Stack
-* **Frontend:** HTML5, CSS3
-* **Hosting:** GitHub Pages
+**🚀 Live Site:** [https://esperiquette.github.io/portfolio/](https://esperiquette.github.io/portfolio/)
 
 ## 📐 About Me
-I am a Mechanical Engineer with a focus on solutions sales and automation. My background includes experience with:
-* Mechanical Design
-* Automation (Siemens Solutions Sales)
-* Sustainable Engineering & Astrobiology (Plant growth systems)
+Mechanical Engineer (B.S., Cal Poly Pomona) with experience in design, manufacturing, and automation. Currently a Smart Building Sales Specialist on the HVAC automation solutions team at Siemens.
 
-Feel free to reach out via the contact information provided on the portfolio site!
+**Core Skills:** Mechanical Design | HVAC Automation | Scientific Computing
+
+## ⚙️ Featured Projects
+* **Vertical Injection Molding Machine:** Designed and built a functional thermoplastic injector with a custom high-torque drive system.
+* **Forestry Fire Detection System:** Integrated Raspberry Pi, IR, and FLIR sensors.
+
+## 🛠 Tech Stack
+HTML5, CSS3, GitHub Pages
+
+## 📫 Let's Connect
+[LinkedIn](https://www.linkedin.com/in/esperiquette)
