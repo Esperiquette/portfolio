@@ -8,8 +8,6 @@ This site collects my work experience, projects and undergraduate research, with
 - **Research:** Cal Poly Pomona STARS work on quantum technologies for autonomous vehicles, a UAV and ground-data correlation study, and the WISTLS sampling drill senior project.
 - **Experience:** Sunbelt Controls, Siemens, and Air Force Civilian Service at Edwards AFB.
 
-Most of these were team projects, and each entry states my role.
 
 **View the site:** https://esperiquette.github.io/portfolio/
 
-**Contact:** https://github.com/Esperiquette
